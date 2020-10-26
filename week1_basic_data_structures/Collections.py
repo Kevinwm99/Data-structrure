@@ -102,7 +102,7 @@ class Dequeue():
     def top(self):
         self.deque.head.key
     def __len__(self):
-        return len(self.deque)
+        return len(self.deque)      
 class Node():
     def __init__(self,key):
         self.key = key
@@ -169,9 +169,8 @@ class Singly_linked_list():
             if find_key.next.key == key:    # if the next node is the key we want to erase
                 prev_node = find_key        # define previous and next nodes
                 next_node = find_key.next.next
-                erase_node = find_key.next  # this is the node we want to delete
                 prev_node.next = next_node  # connect previous and next nodes
-                erase_node = None           # erase the node
+                find_key.next = None           # erase the node
                 return
             find_key=find_key.next
     def addBefore(self,node,key):
@@ -217,10 +216,13 @@ class Singly_linked_list():
             return True
         return False
 class Doubly_linked_list():
+    # _registry=[]
     def __init__(self):
         self.head = None
         self.tail = None
-        self.size = 0
+        self.size = 0 
+
+        # self._registry.append(self)
     def print_list(self):
         print_node = self.head
         if not self.isEmpty():print("head")
