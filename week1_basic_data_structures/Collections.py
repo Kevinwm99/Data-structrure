@@ -160,7 +160,6 @@ class Singly_linked_list():
             find_key=find_key.next
         raise Exception("can't find the key") 
     def erase(self,key):
-        self.findKey(key)                   # find whether there is a key in the list
         find_key = self.head
         if find_key.key ==key:              # if the element is the head 
             self.head = self.head.next
@@ -173,6 +172,8 @@ class Singly_linked_list():
                 find_key.next = None           # erase the node
                 return
             find_key=find_key.next
+        if find_key.key != key:
+            raise Exception("can't find key")
     def addBefore(self,node,key):
         new_node = Node(key) 
         find_node = self.head
@@ -328,26 +329,26 @@ class Doubly_linked_list():
             print("{} has been removed from the list".format(find_key.key))
             self.size -=1
             return
-        else:
-            if find_key == self.head:       # if the erasing key is the head
-                self.head = find_key.next
-                self.head.prev = None
-                print("{} has been removed from the list".format(find_key.key))
-                self.size -=1
-                return
-            if find_key == self.tail:       # if the erasing key is the tail
-                self.tail = find_key.prev
-                self.tail.next = None
-                print("{} has been removed from the list".format(find_key.key))
-                self.size -=1
-                return
-            next_value = find_key.next      # Otherwise, delete it by connecting the previous and the next node
-            prev_value =find_key.prev
-            next_value.prev = prev_value
-            prev_value.next = next_value
+
+        if find_key == self.head:       # if the erasing key is the head
+            self.head = find_key.next
+            self.head.prev = None
             print("{} has been removed from the list".format(find_key.key))
             self.size -=1
             return
+        if find_key == self.tail:       # if the erasing key is the tail
+            self.tail = find_key.prev
+            self.tail.next = None
+            print("{} has been removed from the list".format(find_key.key))
+            self.size -=1
+            return
+        next_value = find_key.next      # Otherwise, delete it by connecting the previous and the next node
+        prev_value =find_key.prev
+        next_value.prev = prev_value
+        prev_value.next = next_value
+        print("{} has been removed from the list".format(find_key.key))
+        self.size -=1
+        return
 class Dynamic_array():
     def __init__(self):
         self.size = 0
